@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Playground</title>
+</head>
+
+<body>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("di");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+
+        function myFunction2() {
+            var x = document.getElementById("di2");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+    </script>
+    <h1 class="reg">Machine Learning Playground</h1>
+
+    {{ df | safe }}
+
+
+    <h2 class="desc">Description</h2>
+    <button onclick="myFunction()" class="click">Click</button>
+    <div id="di" , style="display: none;">
+        {{ info | safe }}
+    </div>
+
+
+    <h2 class="pltext">Plot</h2>
+    <div class="plot">
+        <form action="models_class" method="POST">
+            X = <select name="X_ax">
+                {% for i in col_names %}
+                <option style="color: white;" value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            Y = <select name="Y_ax" >
+                {% for i in col_names %}
+                <option style="color: white;" value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Plot">
+        </form>
+    </div>
+    <div class="png1">
+        <img src="data:image/png;base64,{{ plot }}" width="500">
+    </div>
+
+
+
+
+    <h2 style="color: white;">Train-Test-Split</h2>
+    <form action="build_your_m_c" method="post">
+        <button onClick="history.go(0);" id="tts_" type="button" name="btn_tts" class="try_b">Try</button>
+    </form>
+    <h3 style="color: white;">Choose one of the classification models</h3>
+    <form action="build_your_m_c" method="post">
+        <select name="classes_c">
+            {% for i in classes %}
+            <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Fit Model">
+    </form>
+
+    <div>
+        <button onclick="myFunction2()" class="get_s">Get score</button>
+        <div id="di2" style="display: none;">
+            <h2 style="color: white;">Score prediction:</h2>
+            <h3 style="color: white;">{{ tts_scores | safe }}</h3>
+            <img src="data:image/png;base64,{{ plot_sc }}" width="500">
+        </div>
+    </div>
+
+    <script>
+        function myFunction() {
+            var desc = document.getElementById("di");
+            if (desc.style.display === "none") {
+                desc.style.display = "block";
+            } else {
+                desc.style.display = "none";
+            }
+        }
+
+        function myFunction2() {
+            var desc = document.getElementById("di2");
+            if (desc.style.display === "none") {
+                desc.style.display = "block";
+            } else {
+                desc.style.display = "none";
+            }
+        }
+    </script>
+</body>
+<style>
+    * {
+        background-color: #1B2735;
+    }
+
+    .reg {
+
+        color: white;
+        
+    }
+
+    .dataframe {
+
+        background: #7E9BBD;
+        border-radius: 25px;
+        
+        
+    }
+
+    /* Центр */
+    td {
+        background: white !important;
+        border-radius: 25px;
+        text-align: center;
+
+    } 
+
+    /* Вверх и лево */
+    th {
+        text-align: center;
+        border-radius: 25px;
+        background: white !important;
+    }
+    .desc{
+
+        color: white;
+
+        background-color: none;
+        font-size: xx-large;
+    }
+
+    .click{
+        
+
+        background-color: white;
+    }
+    .pltext{
+        
+
+        color: white;
+        font-size: xx-large;
+    }
+    form{
+        color: white;
+        
+    }
+    select{
+        background: white;
+    }
+    input{
+        background: white;
+    }
+    .try_b{
+        background: white;
+    }
+    .get_s{
+        background: white;
+    }
+</style>
+
+</html>
